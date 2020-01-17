@@ -36,6 +36,12 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, factory).get(CurrentWeatherViewModel::class.java)
         bindUi()
+
+        val myCat = Cat()
+        val myDog = Dog()
+        myCat.age = 5
+        myDog.bark()
+        myCat.meow()
     }
 
     private fun bindUi() = launch {
@@ -95,5 +101,27 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     private fun updateVisibility(distance: Int) {
         val unit = "km"
         textView_visibility.text = "Visibility: $distance $unit"
+    }
+}
+
+class Cat : Animal() {
+    fun meow() {
+        println("Meaaaaau")
+    }
+}
+
+class Dog : Animal() {
+    fun bark() {
+        println("AfAfAfAf")
+    }
+}
+
+open class Animal {
+    var name: String = ""
+    var color: String = ""
+    var age: Int = -1
+
+    fun eat() {
+        println("Eating")
     }
 }
